@@ -4,6 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 20px;
 }
 
 .button {
@@ -15,4 +16,59 @@
     font-size: 54px;
     border-radius: 7px;
     border: 1px solid #EF2917;
+}
+
+.div {
+    margin-top: -13%;
+    width: 50%;
+    background-color: white;
+    font-family: "Just Me Again Down Here", cursive;
+    color: #EF2917;
+    font-size: 74px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+}
+
+.imagem {
+    width: 70%;
+    height: 37vh;
+    border: 10px solid black;
+    padding: 5%;
+    margin: 5%;
+    border-radius: 15px;
+}
+
+.teste {
+    width: 80px;
+    height: 80px;
+}
+
+.timer {
+    display: flex;
+    align-items: center;
+    color: black;
+    margin-bottom: 20px;
+}
+
+.butt {
+    width: 40%;
+    background-color: #034732;
+    color: white;
+    margin-bottom: 2%;
+    font-family: "Just Me Again Down Here", cursive;
+    font-size: 48px;
+    border-radius: 5px;
+}
+
+.canva {
+    background: lightgray;
+    width: 70%; 
+    height: 37vh;
+    border: 10px solid black;
+    margin-bottom: 2%;
+    border-radius: 15px;
 }
