@@ -1,15 +1,24 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./styles.module.scss";
+import axios from "axios";
 
 export function ButtonComponent() {
   const [clicado, setClicado] = useState(false);
   const [segundos, setSegundos] = useState(5);
   const [randomAnimalImage, setRandomAnimalImage] = useState(null);
   const [isDrawing, setIsDrawing] = useState(false);
-  const [size, setSize] = useState(5);
+  const [size, setSize] = useState(20);
   const canvasRef = useRef(null);
-  const canvasWidth = 800; // Largura do quadro branco
-  const canvasHeight = 600; // Altura do quadro branco
+  const canvasWidth = 512; // Largura do quadro branco
+  const canvasHeight = 512; // Altura do quadro branco
+
+  useEffect(() => {
+    if (segundos == 0) {
+      var context = canvasRef.current.getContext("2d");
+      context.fillStyle = "white";
+      context.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+    }
+  }, [segundos]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -30,6 +39,8 @@ export function ButtonComponent() {
 
     return new Blob([ia], { type: mimeString })
   }
+
+
 
   const RandomizeAnimal = () => {
     const animals = {
@@ -56,6 +67,7 @@ export function ButtonComponent() {
 
     setRandomAnimalImage(randomAnimalImageURL);
     setSegundos(5);
+
   };
 
   const handleMouseDown = (event) => {
@@ -98,11 +110,10 @@ export function ButtonComponent() {
     const formData = new FormData();
     const file = DataURIToBlob(image); // Você pode usar essa URL para exibir a imagem ou salvá-la
     formData.append('file', file, 'image.jpg') 
-    const response = await fetch("http://localhost:5000/", {
-      method: "POST",
-      body: formData,
-    });
+
+    const response = await axios.post("http://localhost:5000/", formData)
     console.log(response)
+    RandomizeAnimal()
   };
 
   return (
