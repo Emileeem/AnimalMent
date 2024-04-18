@@ -4,14 +4,15 @@ import axios from "axios";
 
 export function ButtonComponent() {
   const [clicado, setClicado] = useState(false);
+  const [clicado2, setClicado2] = useState(false);
   const [segundos, setSegundos] = useState(5);
   const [randomAnimalImage, setRandomAnimalImage] = useState(null);
   const [nomeAnimal, setNomeAnimal] = useState(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [size, setSize] = useState(20);
   const canvasRef = useRef(null);
-  const canvasWidth = 512; // Largura do quadro branco
-  const canvasHeight = 512; // Altura do quadro branco
+  const canvasWidth = 850; // Largura do quadro branco
+  const canvasHeight = 500; // Altura do quadro branco
 
   useEffect(() => {
     if (segundos == 0) {
@@ -136,7 +137,7 @@ export function ButtonComponent() {
           </div>
         </div>
       )}
-      {clicado && segundos <= 0 && (
+      {!clicado2 && clicado && segundos <= 0 && (
         <div className={styles.div}>
           Agora escreva o nome do animal
           <canvas
@@ -147,7 +148,14 @@ export function ButtonComponent() {
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
           ></canvas>
-          <button className={styles.butt}  onClick={saveDrawing}> Pronto! </button>
+          <button className={styles.butt}  onClick={() => {saveDrawing(); setClicado2(true)}}> Pronto! </button>
+        </div>
+      )}
+      {clicado2 && (
+        <div className={styles.resposta}>
+          A SUA RESPOSTA ESTÁ SLALA
+          <br />
+          Resposta Correta: {nomeAnimal}
         </div>
       )}
     </div>
