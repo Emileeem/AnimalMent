@@ -6,6 +6,7 @@ export function ButtonComponent() {
   const [clicado, setClicado] = useState(false);
   const [segundos, setSegundos] = useState(5);
   const [randomAnimalImage, setRandomAnimalImage] = useState(null);
+  const [nomeAnimal, setNomeAnimal] = useState(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [size, setSize] = useState(20);
   const canvasRef = useRef(null);
@@ -65,6 +66,7 @@ export function ButtonComponent() {
     console.log("Animal aleatório:", randomAnimalKey);
     console.log("Caminho da imagem do animal aleatório:", randomAnimalImageURL);
 
+    setNomeAnimal(randomAnimalKey)
     setRandomAnimalImage(randomAnimalImageURL);
     setSegundos(5);
 
@@ -109,7 +111,8 @@ export function ButtonComponent() {
     const image = canvas.toDataURL(); // Converte o desenho em uma URL de imagem
     const formData = new FormData();
     const file = DataURIToBlob(image); // Você pode usar essa URL para exibir a imagem ou salvá-la
-    formData.append('file', file, 'image.jpg') 
+    formData.append('file', file, 'image.jpg')
+    formData.append('nome', nomeAnimal) 
 
     const response = await axios.post("http://localhost:5000/", formData)
     console.log(response)
